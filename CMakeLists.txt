@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -28,9 +29,10 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
+hunter_add_package(nlohmann_json)
+find_package(nlohmann_json CONFIG REQUIRED)
 
 add_library(${PROJECT_NAME} STATIC
-  # enum your files and delete this comment
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
 )
 
@@ -43,7 +45,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   "$<INSTALL_INTERFACE:include>"
 )
 
-target_link_libraries(demo ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 
 if(BUILD_TESTS)
   add_executable(tests
@@ -87,7 +89,6 @@ install(TARGETS ${PROJECT_NAME} demo
 )
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
-
 install(EXPORT "${PROJECT_NAME}-targets"
   NAMESPACE "${PROJECT_NAME}::"
   DESTINATION "lib/cmake"
