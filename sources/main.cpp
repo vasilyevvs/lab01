@@ -1,5 +1,7 @@
 #include "iostream"
 #include "string"
+#include "iomanip"
+#include "any"
 using namespace std
 using nlohmann::json
 string filePath;
@@ -17,35 +19,49 @@ void from_json(const json& j, student_t& s) {
     s.debt = get_debt(j.at("debt"));
 }
 
-auto get_name(const json& j) -> std::string {
-    return j.get<std::string>();
+auto get_name(const json& j) -> string {
+    return j.get<string>();
 }
 
-auto get_debt(const json& j) -> std::any {
+auto get_debt(const json& j) -> any {
     if (j.is_null())
         return nullptr;
     else if (j.is_string())
-        return j.get<std::string>();
+        return j.get<string>();
     else
-        return j.get<std::vector<std::string> >();
+        return j.get<vector<string> >();
 }
 
-auto get_avg(const json& j) -> std::any {
+auto get_avg(const json& j) -> any {
     if (j.is_null())
         return nullptr;
     else if (j.is_string())
-        return j.get<std::string>();
+        return j.get<string>();
     else if (j.is_number_float())
         return j.get<double>();
     else
-        return j.get<std::size_t>();
+        return j.get<size_t>();
 }
 
-auto get_group(const json& j) -> std::any {
+auto get_group(const json& j) -> any {
     if (j.is_string())
-        return = j.get<std::string>();
+        return = j.get<string>();
     else
-    return j.get<std::size_t>();
+    return j.get<size_t>();
+}
+
+string stringi(any& item)
+{
+  stringstream ss;
+  if(item.type() == typeid(nullptr_t))
+    ss << "null";
+  else if(item.type() == typeid(string))
+    ss << any_cast<string>(item);
+  else if(item.type() == typeid(int))
+    ss << any_cast<int>(item);
+  else if(item.type() == typeid(float))
+    ss << any_cast<float>(item);
+
 }
 
 int main() {
@@ -66,22 +82,21 @@ int main() {
     print(students, std::cout);
 }
 
-void print(const vector<student_t>& students, ostream& os) {
-    //stdw | name          | group  | avg  | debt          |
-    for (auto const& student : students) {
-        print(student, os);
-    }
+void print(string s1, string s2, string s3, string s4, std::ostream& os)
+{
+  os << "| " << setw(20) << std::left << s1 << "| "
+     <<  setw(10) << std::left << s2 << "| "
+     <<  setw(10) << std::left << s3 << "| "
+     <<  setw(10) << std::left << s4 << "|\n"
+     << "|---------------------|-----------|-----------|-----------|\n";
 }
-void print(const student_t& student, std::ostream& os) {
-    //исключение строки, цифры, и так далее по условию
-    //кусок кода написать где каждый столбец приводится к строке, по условию опять же
-    if (student.debt.type() == typeid(std::nullptr_t)) {
-        os << "null";
-    } else if (student.debt.type() == typeid(std::string)) {
-        os << std::any_cast<std::string>(student.debt);
-    } else {
-        os
-                << std::any_cast<std::vector<std::string> >(student.debt).size()
-                << " items";
-    }
+void print(student_t& student, std::ostream& os)
+{
+  print(student.name, student.group, student.avg,  student.debt, os);
 }
+void print(vector<student_t>& students, std::ostream& os)
+{
+  print( "name", "group", "avg", "debt", os);
+  for (student_t& student : students) {
+    print(student, os);
+  }
