@@ -3,7 +3,8 @@
 
   int main()
   {
-    string jsonPath("../1.json");
+    string jsonPath;
+    cin >> jsonPath ;
     ifstream file(jsonPath);
     if (!file) {
       throw std::runtime_error{"unable to open json: " + jsonPath};
