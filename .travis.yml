@@ -1,8 +1,8 @@
 os: linux
-language: minimal
+language: shell
 services:
   - docker
-
+dist: "xenial",
 jobs:
   include:
     - name: "checks"
