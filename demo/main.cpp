@@ -21,5 +21,4 @@
       students.push_back(s);
     }
     print(students, std::cout);
-
   }
