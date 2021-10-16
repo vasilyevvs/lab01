@@ -19,7 +19,6 @@ jobs:
 notifications:
   email: false
 
-
 branches:
   only:
     - main
