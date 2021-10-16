@@ -1,8 +1,7 @@
 os: linux
-language: shell
+language: minimal
 services:
   - docker
-dist: "xenial",
 jobs:
   include:
     - name: "checks"
@@ -22,5 +21,4 @@ notifications:
 
 branches:
   only:
-    - master
     - main
