@@ -1,4 +1,4 @@
-// Copyright 2021 Your Name <Vasilyev  Danila>
+// Copyright 2021 Vasilyev  Danila
 #include <nlohmann/json.hpp>
 #include <sstream>
 #include "any"
@@ -6,7 +6,7 @@
 #include "iomanip"
 #include "iostream"
 #include "string"
-using namespace std;
+#include "vector"
 using nlohmann::json;
 #ifndef INCLUDE_HEADER_HPP_
 #define INCLUDE_HEADER_HPP_
@@ -16,7 +16,7 @@ struct student_t {
   any avg;
   any debt;
 };
-auto get_name(const json& j)-> string ;
+auto get_name(const json& j)-> string;
 auto get_debt(const json& j)-> any;
 auto get_avg(const json& j)-> any;
 auto get_group(const json& j)-> any;
