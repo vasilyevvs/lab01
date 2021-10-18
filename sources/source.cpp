@@ -1,3 +1,4 @@
+// Copyright 2021 Vasilyev  Danila
 #include "header.hpp"
 auto get_name(const json& j) -> string {
   return j.get<string>();
