@@ -49,7 +49,8 @@ std::string toString(std::any& item)
   else  ss << "unknown";
   return ss.str();
 }
-void print(std::string s1, std::string s2, std::string s3, std::string s4, std::ostream& os)
+void print(std::string s1, std::string s2, std::string s3, std::string s4,
+           std::ostream& os)
 {
   os << "| " << std::setw(20) << std::left << s1 << "| "
      <<  std::setw(10) << std::left << s2 << "| "

@@ -22,7 +22,8 @@ auto get_avg(const json& j)-> std::any;
 auto get_group(const json& j)-> std::any;
 void from_json(const json& j, student_t& s);
 std::string toString(std::any& item);
-void print(std::string s1, std::string s2, std::string s3, std::string s4, std::ostream& os);
+void print(std::string s1, std::string s2, std::string s3, std::string s4,
+           std::ostream& os);
 void print(student_t& student, std::ostream& os);
 void print(std::vector<student_t>& students, std::ostream& os);
 #endif // INCLUDE_HEADER_HPP_
