@@ -31,7 +31,9 @@ hunter_add_package(nlohmann_json)
 find_package(nlohmann_json CONFIG REQUIRED)
 
 add_library(${PROJECT_NAME} STATIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp)
+        # enum your files and delete this comment
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
+        )
 target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 
 
@@ -50,7 +52,6 @@ if(BUILD_TESTS)
   include_directories(${CMAKE_SOURCE_DIR}/jsonExamples)
   add_definitions(-D_JSON_DIR="${CMAKE_SOURCE_DIR}/jsonExamples")
   add_executable(tests
-
           ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
           )
   target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main)

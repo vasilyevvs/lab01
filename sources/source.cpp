@@ -1,29 +1,29 @@
 // Copyright 2021 Vasilyev  Danila
 #include "header.hpp"
-auto get_name(const json& j) -> string {
-  return j.get<string>();
+auto get_name(const json& j) -> std::string {
+  return j.get<std::string>();
 }
-auto get_debt(const json& j) -> any {
+auto get_debt(const json& j) -> std::any {
   if (j.is_null())
     return nullptr;
   else if (j.is_string())
-    return j.get<string>();
+    return j.get<std::string>();
   else
-    return j.get<vector<string> >();
+    return j.get<std::vector<std::string> >();
 }
-auto get_avg(const json& j) -> any {
+auto get_avg(const json& j) -> std::any {
   if (j.is_null())
     return nullptr;
   else if (j.is_string())
-    return j.get<string>();
+    return j.get<std::string>();
   else if (j.is_number_float())
     return j.get<double>();
   else
     return j.get<size_t>();
 }
-auto get_group(const json& j) -> any {
+auto get_group(const json& j) -> std::any {
   if (j.is_string())
-    return j.get<string>();
+    return j.get<std::string>();
   else
     return j.get<size_t>();
 }
@@ -49,12 +49,12 @@ std::string toString(std::any& item)
   else  ss << "unknown";
   return ss.str();
 }
-void print(string s1, string s2, string s3, string s4, std::ostream& os)
+void print(std::string s1, std::string s2, std::string s3, std::string s4, std::ostream& os)
 {
-  os << "| " << setw(20) << std::left << s1 << "| "
-     <<  setw(10) << std::left << s2 << "| "
-     <<  setw(10) << std::left << s3 << "| "
-     <<  setw(10) << std::left << s4 << "|\n"
+  os << "| " << std::setw(20) << std::left << s1 << "| "
+     <<  std::setw(10) << std::left << s2 << "| "
+     <<  std::setw(10) << std::left << s3 << "| "
+     <<  std::setw(10) << std::left << s4 << "|\n"
      << "|---------------------|-----------|-----------|-----------|\n";
 }
 void print(student_t& student, std::ostream& os)
@@ -62,7 +62,7 @@ void print(student_t& student, std::ostream& os)
   print(student.name, toString(student.group),
         toString(student.avg),  toString(student.debt), os);
 }
-void print(vector<student_t>& students, std::ostream& os) {
+void print(std::vector<student_t>& students, std::ostream& os) {
   print("name", "group", "avg", "debt", os);
   for (student_t& student : students) {
     print(student, os);
